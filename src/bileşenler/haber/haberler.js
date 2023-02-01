@@ -103,8 +103,57 @@ const data = [
 
     <span class="expandButton">+</span>
   </div>
+*/
 
-  Adım 2: Hala `haberYapici` içindeyiz, span.expandButton 'a bir click event dinleyici ekleyin.
+
+function haberYapici(haber) {
+  
+    const article = document.createElement("div");
+    article.classList.add("article");
+
+    const haberBasligi = document.createElement("h2");
+
+    const paraTarih = document.createElement("p");
+    paraTarih.classList.add("tarih");
+    const paragraph1 = document.createElement("p");
+
+    const paragraph2 = document.createElement("p");
+
+    const paragraph3 = document.createElement("p");
+
+
+    const expandButton = document.createElement("span");
+    expandButton.classList.add("expandButton");
+   
+
+    haberBasligi.textContent =haber.baslik;
+    paraTarih.textContent = haber.tarih;
+    paragraph1.textContent = haber.ilkParagraf;
+    paragraph2.textContent = haber.ikinciParagraf;
+    paragraph3.textContent = haber.ucuncuParagraf;
+    expandButton.textContent = "+";
+
+    article.appendChild(haberBasligi);
+    article.appendChild(paragraph1);
+    article.appendChild(paragraph2);
+    article.appendChild(paragraph3);
+    article.appendChild(expandButton);
+    document.querySelector(".articles").appendChild(article);  
+    console.log(article);
+    expandButton.addEventListener("click", () => {
+      article.classList.toggle("article-open");
+    });
+
+
+    return article;
+}
+
+const articles = document.querySelector(".articles");
+
+data.forEach((haber) => articles.appendChild(haberYapici(haber)));
+
+
+/*  Adım 2: Hala `haberYapici` içindeyiz, span.expandButton 'a bir click event dinleyici ekleyin.
   Bu dinleyici div.article öğesine 'article-open' class'ını ekleyip/çıkaracak (toogle).
 
   Adım 3: Fonksiyonunuzdan bir öğe döndürmeyi unutmayın.
